@@ -701,20 +701,37 @@ impl SignaturePublicKey {
     /// Verify a `Signature` on the `payload` byte slice with the key pair's
     /// public key.
     pub fn verify(&self, signature: &Signature, payload: &[u8]) -> Result<(), SignatureError> {
-        if verify(
-            // It's ok to use `unwrap()` here, since we checked the signature scheme is supported
-            // when the public key was created.
-            SignatureMode::try_from(self.signature_scheme).unwrap(),
-            Some(DigestMode::try_from(self.signature_scheme).unwrap()),
+        let sig_mode = match SignatureMode::try_from(self.signature_scheme) {
+            Ok(mode) => mode,
+            Err(e) => {
+                error!("Signature Scheme Not supported: {:?} - {:?}", self.signature_scheme, e);
+                return Err(SignatureError::UnknownAlgorithm)
+            },
+        };
+        
+        let dig_mode = match DigestMode::try_from(self.signature_scheme) {
+            Ok(mode) => mode,
+            Err(e) => return {
+                error!("Digest Mode Not Detected by Signature Scheme: {:?} - {:?}", self.signature_scheme, e);
+                Err(SignatureError::UnknownAlgorithm)
+            },
+        };
+        
+        match verify(
+            sig_mode,
+            Some(dig_mode),
             &self.value,
             &signature.value,
             payload,
-        )
-        .unwrap()
-        {
-            Ok(())
-        } else {
-            Err(SignatureError::InvalidSignature)
+        ) {
+            Ok(b) => {
+                if b {
+                    return Ok(());
+                } else {
+                    return Err(SignatureError::InvalidSignature);
+                }
+            },
+            Err(_e) => return Err(SignatureError::InvalidSignature),
         }
     }
 }
