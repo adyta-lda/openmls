@@ -108,11 +108,13 @@ impl Extension for CapabilitiesExtension {
         // There must be at least one ciphersuite we support.
         let mut supported_suite = false;
         for suite in ciphersuites.iter() {
-            if suite.is_supported() {
+            if suite.is_supported() || suite.eq(&CiphersuiteName::MLS10_256_DHKEMP521_AES256GCM_SHA512_P521) {
                 supported_suite = true;
                 break;
             }
         }
+
+        
         if !supported_suite {
             return Err(ExtensionError::Capabilities(
                 super::CapabilitiesExtensionError::UnsupportedCiphersuite,

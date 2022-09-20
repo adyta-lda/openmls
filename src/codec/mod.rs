@@ -296,12 +296,6 @@ pub fn decode_vec<T: Codec>(vec_size: VecSize, cursor: &mut Cursor) -> Result<Ve
         vec_size,
         cursor.raw()
     );
-
-    println!(
-        "Decoding vector with size {:?}: {:X?}",
-        vec_size,
-        cursor.raw()
-    );
     let mut result: Vec<T> = Vec::new();
     let len;
     match vec_size {

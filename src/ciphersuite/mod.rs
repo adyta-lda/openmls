@@ -119,8 +119,13 @@ impl TryFrom<SignatureScheme> for SignatureMode {
             SignatureScheme::ED25519 => Ok(SignatureMode::Ed25519),
             SignatureScheme::ECDSA_SECP256R1_SHA256 => Ok(SignatureMode::P256),
             SignatureScheme::ED448 => Err("SignatureScheme ed448 is not supported."),
+            // SignatureScheme::ECDSA_SECP521R1_SHA512 => {
+            //     Err("SignatureScheme ecdsa_secp521r1 is not supported.")
+            // }
             SignatureScheme::ECDSA_SECP521R1_SHA512 => {
-                Err("SignatureScheme ecdsa_secp521r1 is not supported.")
+                Ok(SignatureMode::P256) // This is a 'hack' since for now we only need the P521
+                                        // for KP encoding/decoding operation
+                                        // other operations not supported in BE over P521
             }
         }
     }
@@ -135,8 +140,13 @@ impl TryFrom<SignatureScheme> for DigestMode {
             SignatureScheme::ED25519 => Ok(DigestMode::Sha256),
             SignatureScheme::ECDSA_SECP256R1_SHA256 => Ok(DigestMode::Sha256),
             SignatureScheme::ED448 => Err("SignatureScheme ed448 is not supported."),
+            // SignatureScheme::ECDSA_SECP521R1_SHA512 => {
+            //     Err("SignatureScheme ecdsa_secp521r1 is not supported.")
+            // }
             SignatureScheme::ECDSA_SECP521R1_SHA512 => {
-                Err("SignatureScheme ecdsa_secp521r1 is not supported.")
+                Ok(DigestMode::Sha512) // This is a 'hack' since for now we only need the P521
+                                        // for KP encoding/decoding operation
+                                        // other operations not supported in BE over P521
             }
         }
     }
@@ -372,6 +382,11 @@ impl PartialEq for Ciphersuite {
 impl Ciphersuite {
     /// Create a new ciphersuite from the given `name`.
     pub fn new(name: CiphersuiteName) -> Result<Self, ConfigError> {
+    
+        if name.eq(&CiphersuiteName::MLS10_256_DHKEMP521_AES256GCM_SHA512_P521) {
+            return Ciphersuite::new(CiphersuiteName::MLS10_128_DHKEMP256_AES128GCM_SHA256_P256);
+        }
+
         if !Config::supported_ciphersuite_names().contains(&name) {
             return Err(ConfigError::UnsupportedCiphersuite);
         }

@@ -63,7 +63,8 @@ pub(crate) fn kem_from_suite(
         CiphersuiteName::MLS10_128_DHKEMP256_AES128GCM_SHA256_P256 => Ok(HpkeKemMode::DhKemP256),
         CiphersuiteName::MLS10_128_DHKEMX25519_CHACHA20POLY1305_SHA256_Ed25519 => {
             Ok(HpkeKemMode::DhKem25519)
-        }
+        },
+        CiphersuiteName::MLS10_256_DHKEMP521_AES256GCM_SHA512_P521 => Ok(HpkeKemMode::DhKemP521), //FIXME for encoding/decoding only
         _ => Err(ConfigError::UnsupportedCiphersuite),
     }
 }
