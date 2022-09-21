@@ -236,6 +236,11 @@ impl KeyPackage {
     pub fn ciphersuite_name(&self) -> CiphersuiteName {
         self.ciphersuite.name()
     }
+
+    pub fn ciphersuite_name_hacked_fn(&self) -> CiphersuiteName {
+        self.ciphersuite_name
+    }
+    
 }
 
 #[derive(Debug, Serialize, Deserialize)]
