@@ -63,11 +63,13 @@ fn supported_ciphersuites() {
         CiphersuiteName::MLS10_128_DHKEMX25519_AES128GCM_SHA256_Ed25519,
         CiphersuiteName::MLS10_128_DHKEMX25519_CHACHA20POLY1305_SHA256_Ed25519,
         CiphersuiteName::MLS10_128_DHKEMP256_AES128GCM_SHA256_P256,
+        CiphersuiteName::MLS10_256_DHKEMP521_AES256GCM_SHA512_P521, //FIXME moved here because of the 'hacks'
+                                                                    // to support decoding
     ];
 
     const UNSUPPORTED_CIPHERSUITE_NAMES: &[CiphersuiteName] = &[
         CiphersuiteName::MLS10_256_DHKEMX448_AES256GCM_SHA512_Ed448,
-        CiphersuiteName::MLS10_256_DHKEMP521_AES256GCM_SHA512_P521,
+        // CiphersuiteName::MLS10_256_DHKEMP521_AES256GCM_SHA512_P521, //FIXME moved to supported
         CiphersuiteName::MLS10_256_DHKEMX448_CHACHA20POLY1305_SHA512_Ed448,
     ];
 

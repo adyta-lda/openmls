@@ -28,6 +28,7 @@ mod test_key_packages;
 pub struct KeyPackage {
     protocol_version: ProtocolVersion,
     ciphersuite: &'static Ciphersuite,
+    ciphersuite_name: CiphersuiteName,
     hpke_init_key: HPKEPublicKey,
     credential: Credential,
     extensions: Vec<Box<dyn Extension>>,
@@ -37,6 +38,7 @@ pub struct KeyPackage {
 implement_persistence!(
     KeyPackage,
     protocol_version,
+    ciphersuite_name,
     hpke_init_key,
     credential,
     extensions,
@@ -159,6 +161,7 @@ impl KeyPackage {
             // TODO: #85 Take from global config.
             protocol_version: ProtocolVersion::default(),
             ciphersuite: Config::ciphersuite(ciphersuite_name)?,
+            ciphersuite_name: ciphersuite_name,
             hpke_init_key,
             credential: credential_bundle.credential().clone(),
             extensions,
