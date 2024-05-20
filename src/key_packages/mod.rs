@@ -139,6 +139,11 @@ impl KeyPackage {
         let payload = &self.unsigned_payload().unwrap();
         self.signature = credential_bundle.sign(payload).unwrap();
     }
+
+    /// Get the signature of this key package.
+    pub fn signature(&self) -> &Signature {
+        &self.signature
+    }
 }
 
 /// Private `KeyPackage` functions.
