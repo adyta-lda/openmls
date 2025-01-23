@@ -19,7 +19,7 @@ impl Codec for KeyPackage {
         let ciphersuite: &Ciphersuite;
 
         if ciphersuite_name.eq(&CiphersuiteName::MLS10_256_DHKEMP521_AES256GCM_SHA512_P521) {
-            signature = Signature::new_empty();
+            signature = Signature::decode(cursor)?;
             ciphersuite = Config::ciphersuite(CiphersuiteName::MLS10_128_DHKEMP256_AES128GCM_SHA256_P256)?; //all we need for now is to pass through the function
         } else{
             signature = Signature::decode(cursor)?;
