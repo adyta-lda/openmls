@@ -22,6 +22,7 @@ impl Codec for KeyPackage {
             signature = Signature::decode(cursor)?;
             ciphersuite = Config::ciphersuite(CiphersuiteName::MLS10_128_DHKEMP256_AES128GCM_SHA256_P256)?; //all we need for now is to pass through the function
         } else{
+            log::warn!("Decoding a key package with an ciphersuite {:?}", ciphersuite_name);
             signature = Signature::decode(cursor)?;
             ciphersuite = Config::ciphersuite(ciphersuite_name)?;
         }
