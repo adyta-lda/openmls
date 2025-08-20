@@ -1,8 +1,8 @@
-//! # The OpenMLS Delivery Service (DS).
+//! # The openmls_draft Delivery Service (DS).
 //!
 //! This is a minimal implementation of 2.3. Delivery Service in
 //! [The MLS Architecture](https://messaginglayersecurity.rocks/mls-architecture/draft-ietf-mls-architecture.html).
-//! It is used for end-to-end testing of OpenMLS and can be used by other
+//! It is used for end-to-end testing of openmls_draft and can be used by other
 //! implementations. However it should never be used in any sort of production
 //! environment.
 //!
@@ -40,7 +40,7 @@ use std::ops::{Deref, DerefMut};
 use std::sync::Mutex;
 
 use ds_lib::*;
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 #[cfg(test)]
 mod test;
@@ -282,9 +282,9 @@ async fn main() -> std::io::Result<()> {
     pretty_env_logger::init();
 
     // Configure App and command line arguments.
-    let matches = ClapApp::new("OpenMLS DS")
+    let matches = ClapApp::new("openmls_draft DS")
         .version("0.1.0")
-        .author("OpenMLS Developers")
+        .author("openmls_draft Developers")
         .about("PoC MLS Delivery Service")
         .arg(
             clap::Arg::with_name("port")

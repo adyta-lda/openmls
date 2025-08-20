@@ -1,5 +1,5 @@
-//! Prelude for OpenMLS.
-//! Include this to get access to all the public functions of OpenMLS.
+//! Prelude for openmls_draft.
+//! Include this to get access to all the public functions of openmls_draft.
 
 pub use crate::group::GroupConfig;
 pub use crate::group::MlsGroup;

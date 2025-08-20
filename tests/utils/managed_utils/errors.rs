@@ -1,4 +1,4 @@
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 #[derive(Debug)]
 pub enum SetupError {

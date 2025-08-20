@@ -47,7 +47,7 @@ fn main() {
     let mut stdin = stdin.lock();
 
     stdout
-        .write_all(b" >>> Welcome to the OpenMLS CLI :)\nType help to get a list of commands\n\n")
+        .write_all(b" >>> Welcome to the openmls_draft CLI :)\nType help to get a list of commands\n\n")
         .unwrap();
     let mut client = None;
 

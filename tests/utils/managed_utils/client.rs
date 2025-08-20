@@ -3,7 +3,7 @@
 //! that client perform certain MLS operations.
 use std::{cell::RefCell, collections::HashMap};
 
-use openmls::{node::Node, prelude::*};
+use openmls_draft::{node::Node, prelude::*};
 
 use super::{errors::ClientError, ActionType, KeyStore};
 

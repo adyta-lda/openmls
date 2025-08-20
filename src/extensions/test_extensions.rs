@@ -11,7 +11,7 @@ use crate::{
 
 #[test]
 fn capabilities() {
-    // A capabilities extension with the default values for openmls.
+    // A capabilities extension with the default values for openmls_draft.
     let extension_bytes = [0, 1, 0, 16, 1, 1, 6, 0, 1, 0, 2, 0, 3, 6, 0, 1, 0, 2, 0, 3];
 
     let ext = CapabilitiesExtension::default();
@@ -31,7 +31,7 @@ fn capabilities() {
 
 #[test]
 fn key_package_id() {
-    // A key package extension with the default values for openmls.
+    // A key package extension with the default values for openmls_draft.
     let data = [0, 8, 1, 2, 3, 4, 5, 6, 6, 6];
     let kpi = KeyIDExtension::new(&data[2..]);
     assert_eq!(ExtensionType::KeyID, kpi.extension_type());

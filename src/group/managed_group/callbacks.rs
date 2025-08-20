@@ -17,7 +17,7 @@ use crate::group::*;
 ///
 /// The validator functions are:
 /// ```
-/// # use openmls::prelude::{ManagedGroup, Credential};
+/// # use openmls_draft::prelude::{ManagedGroup, Credential};
 /// pub type ValidateAdd =
 ///     fn(managed_group: &ManagedGroup, sender: &Credential, added_member: &Credential) -> bool;
 /// pub type ValidateRemove =
@@ -31,7 +31,7 @@ use crate::group::*;
 /// [managed_group.save()](`ManagedGroup::save()`) to persist the group state.
 ///
 /// ```
-/// # use openmls::prelude::{ManagedGroup, Credential};
+/// # use openmls_draft::prelude::{ManagedGroup, Credential};
 /// pub type AutoSave = fn(managed_group: &ManagedGroup);
 /// ```
 

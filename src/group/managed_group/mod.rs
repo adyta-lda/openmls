@@ -1045,10 +1045,10 @@ impl<'a> ManagedGroup<'a> {
 /// Unified message type
 #[derive(PartialEq, Debug, Clone)]
 pub enum MLSMessage {
-    /// An OpenMLS `MLSPlaintext`.
+    /// An openmls_draft `MLSPlaintext`.
     Plaintext(MLSPlaintext),
 
-    /// An OpenMLS `MLSCiphertext`.
+    /// An openmls_draft `MLSCiphertext`.
     Ciphertext(MLSCiphertext),
 }
 

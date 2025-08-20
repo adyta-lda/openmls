@@ -1,11 +1,11 @@
-//! # OpenMLS Delivery Service Library
+//! # openmls_draft Delivery Service Library
 //!
 //! This library provides structs and necessary implementations to interact with
-//! the OpenMLS DS.
+//! the openmls_draft DS.
 //!
 //! Clients are represented by the `ClientInfo` struct.
 
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 /// Information about a client.
 /// To register a new client create a new `ClientInfo` and send it to
@@ -48,13 +48,13 @@ impl ClientInfo {
 
 /// The DS returns a list of messages on `/recv/{name}`, which is a
 /// `Vec<Message>`. A `Message` is either an `MLSMessage` or a `Welcome` message
-/// (see OpenMLS) for details.
+/// (see openmls_draft) for details.
 #[derive(Debug, Clone, PartialEq)]
 pub enum Message {
-    /// An `MLSMessage` is either an OpenMLS `MLSCiphertext` or `MLSPlaintext`.
+    /// An `MLSMessage` is either an openmls_draft `MLSCiphertext` or `MLSPlaintext`.
     MLSMessage(MLSMessage),
 
-    /// An OpenMLS `Welcome` message.
+    /// An openmls_draft `Welcome` message.
     Welcome(Welcome),
 }
 

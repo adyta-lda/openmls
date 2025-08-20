@@ -1,4 +1,4 @@
-//! # OpenMLS
+//! # openmls_draft
 //!
 //! ## High-level API
 //!

@@ -1,4 +1,4 @@
-use openmls::{group::EmptyInputError, prelude::*};
+use openmls_draft::{group::EmptyInputError, prelude::*};
 
 use std::fs::File;
 use std::path::Path;

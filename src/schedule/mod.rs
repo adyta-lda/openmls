@@ -509,7 +509,7 @@ impl From<&[u8]> for EncryptionSecret {
     }
 }
 
-/// A secret that we can derive secrets from, that are used outside of OpenMLS.
+/// A secret that we can derive secrets from, that are used outside of openmls_draft.
 #[derive(Debug, Serialize, Deserialize)]
 #[cfg_attr(test, derive(PartialEq))]
 pub(crate) struct ExporterSecret {
@@ -529,7 +529,7 @@ impl ExporterSecret {
     }
 
     /// Derive a `Secret` from the exporter secret. We return `Vec<u8>` here, so
-    /// it can be used outside of OpenMLS. This function is made available for
+    /// it can be used outside of openmls_draft. This function is made available for
     /// use from the outside through [`crate::group::mls_group::export_secret`].
     pub(crate) fn derive_exported_secret(
         &self,

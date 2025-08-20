@@ -3,7 +3,7 @@ name = "ds-lib"
 version = "0.1.0"
 authors = ["Franziskus Kiefer <franziskuskiefer@gmail.com>"]
 edition = "2018"
-description = "Types to interact with the OpenMLS DS."
+description = "Types to interact with the openmls_draft DS."
 
 [dependencies]
-openmls = { path = "../../" }
+openmls_draft = { path = "../../" }

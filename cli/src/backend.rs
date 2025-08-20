@@ -6,7 +6,7 @@ use super::{
 };
 
 use ds_lib::*;
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 pub struct Backend {
     ds_url: Url,

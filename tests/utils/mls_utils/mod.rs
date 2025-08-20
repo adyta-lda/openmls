@@ -7,7 +7,7 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 
 use evercrypt::prelude::*;
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 use rand::rngs::OsRng;
 use rand::RngCore;
 

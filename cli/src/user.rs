@@ -1,7 +1,7 @@
 use std::{cell::RefCell, collections::HashMap};
 
 use ds_lib::{ClientKeyPackages, GroupMessage, Message};
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 use super::{backend::Backend, conversation::Conversation, identity::Identity};
 

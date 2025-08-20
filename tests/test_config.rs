@@ -1,11 +1,11 @@
 //! # Test configuration
 //!
-//! openmls can be configured globally to define
+//! openmls_draft can be configured globally to define
 //! * which MLS protocol versions are supported
 //! * which ciphersuites are supported
 //! * which extensions are supported
 
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 #[test]
 fn protocol_version() {

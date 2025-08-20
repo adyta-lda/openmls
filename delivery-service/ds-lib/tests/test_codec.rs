@@ -1,5 +1,5 @@
 use ds_lib::*;
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 #[test]
 fn test_client_info() {

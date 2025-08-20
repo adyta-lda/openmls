@@ -1,5 +1,5 @@
 //! Test decryption key index computation in larger trees.
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 #[macro_use]
 mod utils;

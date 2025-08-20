@@ -1,6 +1,6 @@
 use std::mem::replace;
 
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 pub struct Identity {
     pub(crate) kpb: KeyPackageBundle,

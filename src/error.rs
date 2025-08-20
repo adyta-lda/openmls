@@ -1,7 +1,7 @@
-//! # OpenMLS Errors
+//! # openmls_draft Errors
 //!
 //! Each module has their own errors it is returning. This module will defines
-//! helper macros and functions to define OpenMLS errors.
+//! helper macros and functions to define openmls_draft errors.
 //!
 //! TODO: define global enum with integer error codes for FFI usage.
 
@@ -18,7 +18,7 @@ macro_rules! as_expr {
     };
 }
 
-/// A macro implementing the boilerplate for OpenMLS error enums.
+/// A macro implementing the boilerplate for openmls_draft error enums.
 macro_rules! implement_error {
     // The first rule is for simple error types that don't hold payloads.
     (

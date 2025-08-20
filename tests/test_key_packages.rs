@@ -1,6 +1,6 @@
 //! # Key package tests
 
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 use std::convert::TryFrom;
 
 #[macro_use]

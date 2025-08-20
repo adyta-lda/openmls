@@ -31,7 +31,7 @@ struct Epoch {
     // Chosen by the generator
     tree_hash: String,
     commit_secret: String,
-    // XXX: PSK is not supported in OpenMLS yet #141
+    // XXX: PSK is not supported in openmls_draft yet #141
     psk_secret: String,
     confirmed_transcript_hash: String,
 

@@ -1,4 +1,4 @@
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 #[test]
 fn create_commit_optional_path() {

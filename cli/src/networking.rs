@@ -1,7 +1,7 @@
 use reqwest::{self, blocking::Client, StatusCode};
 use url::Url;
 
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 // TODO: return objects not bytes.
 

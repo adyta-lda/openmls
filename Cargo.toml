@@ -1,12 +1,12 @@
 [package]
-name = "openmls-draft"
+name = "openmls_draft"
 version = "0.3.2"
 authors = ["Raphael Robert"]
 edition = "2018"
 description = "This is a WIP Rust implementation of the Messaging Layer Security (MLS) protocol based on draft 9+."
 license = "MIT"
-documentation = "https://openmls.github.io/openmls/"
-repository = "https://github.com/openmls/openmls/"
+documentation = "https://openmls_draft.github.io/openmls_draft/"
+repository = "https://github.com/openmls_draft/openmls_draft/"
 readme = "README.md"
 
 [workspace]

@@ -86,9 +86,9 @@ struct PersistentConfig {
     constants: Constants,
 }
 
-/// # OpenMLS Configuration
+/// # openmls_draft Configuration
 ///
-/// This is the global configuration for OpenMLS.
+/// This is the global configuration for openmls_draft.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Config {
     protocol_versions: Vec<ProtocolVersion>,

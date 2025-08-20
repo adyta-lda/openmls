@@ -1,6 +1,6 @@
 // Testing some codec functions
 
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 #[test]
 fn string_codec() {

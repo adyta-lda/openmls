@@ -1,10 +1,10 @@
 #[macro_use]
 extern crate criterion;
-extern crate openmls;
+extern crate openmls_draft;
 extern crate rand;
 
 use criterion::Criterion;
-use openmls::prelude::*;
+use openmls_draft::prelude::*;
 
 fn criterion_kp_bundle(c: &mut Criterion) {
     for ciphersuite in Config::supported_ciphersuites() {
