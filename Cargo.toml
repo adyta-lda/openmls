@@ -1,5 +1,5 @@
 [package]
-name = "openmls"
+name = "openmls-draft"
 version = "0.3.2"
 authors = ["Raphael Robert"]
 edition = "2018"
