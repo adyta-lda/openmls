@@ -30,8 +30,9 @@
 //! The DS returns a list of messages queued for the client in all groups they
 //! are part of.
 
+use actix_web::body::{BodyStream, BoxBody, MessageBody};
 use actix_web::{
-    body::Body, get, post, web, web::Payload, App, HttpRequest, HttpServer, Responder,
+ get, post, web, web::Payload, App, HttpRequest, HttpServer, Responder,
 };
 use clap::App as ClapApp;
 use futures_util::StreamExt;
@@ -117,7 +118,8 @@ async fn list_clients(_req: HttpRequest, data: web::Data<Mutex<DsData>>) -> impl
     if clients.encode(&mut out_bytes).is_err() {
         return actix_web::HttpResponse::InternalServerError().finish();
     };
-    actix_web::HttpResponse::Ok().body(Body::from_slice(&out_bytes))
+
+    actix_web::HttpResponse::Ok().body(out_bytes.as_slice().to_owned())
 }
 
 /// Resets the server state.
@@ -136,12 +138,12 @@ async fn reset(_req: HttpRequest, data: web::Data<Mutex<DsData>>) -> impl Respon
 /// for details).
 #[get("/clients/key_packages/{id}")]
 async fn get_key_packages(
-    web::Path(id): web::Path<String>,
+    id: web::Path<String>,
     data: web::Data<Mutex<DsData>>,
 ) -> impl Responder {
     let data = unwrap_data!(data.lock());
 
-    let id = match base64::decode_config(id, base64::URL_SAFE) {
+    let id = match base64::decode_config(id.to_string(), base64::URL_SAFE) {
         Ok(v) => v,
         Err(_) => return actix_web::HttpResponse::BadRequest().finish(),
     };
@@ -151,9 +153,13 @@ async fn get_key_packages(
         Some(c) => c,
         None => return actix_web::HttpResponse::NoContent().finish(),
     };
-    actix_web::HttpResponse::Ok().body(Body::from_slice(&unwrap_data!(client
+    actix_web::HttpResponse::Ok().body(
+        unwrap_data!(client
         .key_packages
-        .encode_detached())))
+        .encode_detached())
+        .as_slice()
+        .to_owned(),
+    )
 }
 
 /// Send a welcome message to a client.
@@ -241,13 +247,13 @@ async fn msg_send(mut body: Payload, data: web::Data<Mutex<DsData>>) -> impl Res
 /// The messages are deleted on the DS when sent out.
 #[get("/recv/{id}")]
 async fn msg_recv(
-    web::Path(id): web::Path<String>,
+    id: web::Path<String>,
     data: web::Data<Mutex<DsData>>,
 ) -> impl Responder {
     let mut data = unwrap_data!(data.lock());
     let data = data.deref_mut();
 
-    let id = match base64::decode_config(id, base64::URL_SAFE) {
+    let id = match base64::decode_config(id.to_string(), base64::URL_SAFE) {
         Ok(v) => v,
         Err(_) => return actix_web::HttpResponse::BadRequest().finish(),
     };
@@ -270,9 +276,10 @@ async fn msg_recv(
     let mut out_bytes = Vec::new();
     if encode_vec(VecSize::VecU16, &mut out_bytes, &out).is_err() {
         return actix_web::HttpResponse::InternalServerError().finish();
-    };
+    }
 
-    actix_web::HttpResponse::Ok().body(Body::from_slice(&out_bytes))
+    actix_web::HttpResponse::Ok().body(out_bytes.as_slice().to_owned())
+
 }
 
 // === Main function driving the DS ===

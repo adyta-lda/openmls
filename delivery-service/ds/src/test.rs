@@ -1,5 +1,7 @@
+use core::panic;
+
 use super::*;
-use actix_web::{dev::Body, http::StatusCode, test, web, web::Bytes, App};
+use actix_web::{App, dev::Response, http::StatusCode, test, web::{self, Bytes}};
 
 #[actix_rt::test]
 async fn test_list_clients() {
@@ -19,15 +21,14 @@ async fn test_list_clients() {
     let mut response = test::call_service(&mut app, req).await;
     assert_eq!(response.status(), StatusCode::OK);
 
-    let response_body = response.response_mut().take_body();
-    let response_body = response_body.as_ref().unwrap();
-
+    let response_body = response.into_body();
     let expected = Vec::<ClientInfo>::new();
-    let response_body = match response_body {
-        Body::Bytes(b) => {
+    let response_body = match response_body.try_into_bytes() {
+        Ok(b) => {
             Vec::<ClientInfo>::decode(&mut Cursor::new(b.as_ref())).expect("Invalid client list")
-        }
-        _ => panic!("Unexpected server response."),
+
+        },
+        Err(_) => panic!("Unexpected server response."),
     };
     assert_eq!(response_body, expected);
 
@@ -64,12 +65,11 @@ async fn test_list_clients() {
     let mut response = test::call_service(&mut app, req).await;
     assert_eq!(response.status(), StatusCode::OK);
 
-    let response_body = response.response_mut().take_body();
-    let response_body = response_body.as_ref().unwrap();
+    let response_body = response.into_body();
 
     let expected = vec![client_data];
-    let response_body = match response_body {
-        Body::Bytes(b) => {
+    let response_body = match response_body.try_into_bytes() {
+        Ok(b) => {
             Vec::<ClientInfo>::decode(&mut Cursor::new(b.as_ref())).expect("Invalid client list")
         }
         _ => panic!("Unexpected server response."),
@@ -84,10 +84,9 @@ async fn test_list_clients() {
     let mut response = test::call_service(&mut app, req).await;
     assert_eq!(response.status(), StatusCode::OK);
 
-    let response_body = response.response_mut().take_body();
-    let response_body = response_body.as_ref().unwrap();
-    let key_packages = match response_body {
-        Body::Bytes(b) => {
+    let response_body = response.into_body();
+    let key_packages = match response_body.try_into_bytes() {
+        Ok(b) => {
             ClientKeyPackages::decode(&mut Cursor::new(b.as_ref()))
                 .expect("Invalid key package response")
                 .0
@@ -171,10 +170,9 @@ async fn test_group() {
     let mut response = test::call_service(&mut app, req).await;
     assert_eq!(response.status(), StatusCode::OK);
 
-    let response_body = response.response_mut().take_body();
-    let response_body = response_body.as_ref().unwrap();
-    let mut client2_key_packages = match response_body {
-        Body::Bytes(b) => {
+    let response_body = response.into_body();
+    let mut client2_key_packages = match response_body.try_into_bytes() {
+        Ok(b) => {
             ClientKeyPackages::decode(&mut Cursor::new(b.as_ref()))
                 .expect("Invalid key package response")
                 .0
@@ -225,10 +223,9 @@ async fn test_group() {
     let mut response = test::call_service(&mut app, req).await;
     assert_eq!(response.status(), StatusCode::OK);
 
-    let response_body = response.response_mut().take_body();
-    let response_body = response_body.as_ref().unwrap();
-    let mut messages: Vec<Message> = match response_body {
-        Body::Bytes(b) => {
+    let response_body = response.into_body();
+    let mut messages: Vec<Message> = match response_body.try_into_bytes() {
+        Ok(b) => {
             decode_vec(VecSize::VecU16, &mut Cursor::new(b.as_ref())).expect("Invalid message list")
         }
         _ => panic!("Unexpected server response."),
@@ -279,10 +276,9 @@ async fn test_group() {
     let mut response = test::call_service(&mut app, req).await;
     assert_eq!(response.status(), StatusCode::OK);
 
-    let response_body = response.response_mut().take_body();
-    let response_body = response_body.as_ref().unwrap();
-    let mut messages: Vec<Message> = match response_body {
-        Body::Bytes(b) => {
+    let response_body = response.into_body();
+    let mut messages: Vec<Message> = match response_body.try_into_bytes() {
+        Ok(b) => {
             decode_vec(VecSize::VecU16, &mut Cursor::new(b.as_ref())).expect("Invalid message list")
         }
         _ => panic!("Unexpected server response."),
